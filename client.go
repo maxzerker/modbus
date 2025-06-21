@@ -1234,10 +1234,6 @@ func (mc *ModbusClient) writeRegisters(addr uint16, values []byte) (err error) {
 }
 
 func (mc *ModbusClient) executeRequest(req *pdu) (res *pdu, err error) {
-	if mc.transport == nil {
-		err = ErrTransportNotInitialized
-		return
-	}
 	conn := mc.conn.Load()
 	if conn == nil || conn.closed.Load() {
 		return nil, ErrConnectionClosed
